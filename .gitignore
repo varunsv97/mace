@@ -64,3 +64,4 @@ htmlcov/
 
 # local planning docs (not for the public repo)
 /doc
+/files

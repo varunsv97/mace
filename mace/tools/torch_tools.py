@@ -7,7 +7,7 @@
 import functools
 import logging
 from contextlib import contextmanager
-from typing import Callable, Dict, Union
+from typing import Callable, Dict, Optional, Union
 
 import numpy as np
 import torch
@@ -141,6 +141,21 @@ def init_wandb(project: str, entity: str, name: str, config: dict, directory: st
         dir=directory,
         resume="allow",
     )
+
+
+def init_mlflow(
+    experiment_name: str,
+    run_name: str,
+    tracking_uri: Optional[str],
+    config: dict,
+):
+    import mlflow
+
+    if tracking_uri:
+        mlflow.set_tracking_uri(tracking_uri)
+    mlflow.set_experiment(experiment_name)
+    mlflow.start_run(run_name=run_name or None)
+    mlflow.log_params(config)
 
 
 @contextmanager

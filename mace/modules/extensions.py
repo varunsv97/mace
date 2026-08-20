@@ -1495,6 +1495,10 @@ class MagneticMACE(torch.nn.Module):
         self.use_last_readout_only = use_last_readout_only
         self.use_magmom_one_body = use_magmom_one_body
 
+        # Keep a reference for config extraction tools (e.g. run_e3nn_to_cueq)
+        self.cueq_config = cueq_config
+        self.oeq_config = oeq_config
+
         # Embedding
         node_attr_irreps = o3.Irreps([(num_elements, (0, 1))])
         node_feats_irreps = o3.Irreps([(hidden_irreps.count(o3.Irrep(0, 1)), (0, 1))])
